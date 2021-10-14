@@ -14,11 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Item", "Solution I
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1831E10D-D93D-48B0-87C5-F56C9DDCC6C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoslynClassifierDemoConsole", "test\RoslynClassifierDemoConsole\RoslynClassifierDemoConsole.csproj", "{494ABBDC-C6A8-46DF-A83E-615D69AE72C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoslynClassifierDemoConsole", "test\RoslynClassifierDemoConsole\RoslynClassifierDemoConsole.csproj", "{494ABBDC-C6A8-46DF-A83E-615D69AE72C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleProject", "test\ExampleProject\ExampleProject.csproj", "{2877C9F5-8D0E-4894-8E10-5160D6115C3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleProject", "test\ExampleProject\ExampleProject.csproj", "{2877C9F5-8D0E-4894-8E10-5160D6115C3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpToHtmlWinApp", "src\CsharpToHtmlWinApp\CsharpToHtmlWinApp.csproj", "{72B2A554-F1A0-4CAE-922D-E6946839AE38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsharpToHtmlWinApp", "src\CsharpToHtmlWinApp\CsharpToHtmlWinApp.csproj", "{72B2A554-F1A0-4CAE-922D-E6946839AE38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

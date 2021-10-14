@@ -1,11 +1,21 @@
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
 namespace CsharpToHtmlWinApp;
 
 public partial class MainWindow : Window
 {
+    static MainWindow()
+    {
+        var serviceCollection = new ServiceCollection();
+        serviceCollection.AddBlazorWebView();
+        Services = serviceCollection.BuildServiceProvider();
+    }
+
     public MainWindow()
     {
         InitializeComponent();
     }
+
+    public static ServiceProvider Services { get; }
 }
