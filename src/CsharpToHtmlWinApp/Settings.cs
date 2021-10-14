@@ -26,7 +26,7 @@ public record Settings(string? CsprojPath)
 
         var path = Path.Combine(folder, SettingFileName);
 
-        using var f = File.OpenWrite(path);
+        using var f = File.Create(path);
         JsonSerializer.Serialize(f, settings);
     }
 }
