@@ -9,6 +9,7 @@ public partial class MainWindow : Window
     {
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddBlazorWebView();
+        serviceCollection.AddSingleton<Models.ClassfierWorkspace>();
         Services = serviceCollection.BuildServiceProvider();
     }
 

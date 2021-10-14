@@ -1,5 +1,6 @@
 ﻿html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #EEEEF2;
 }
 
 .valid.modified:not([type=checkbox]) {
@@ -32,3 +33,65 @@
     right: 0.75rem;
     top: 0.5rem;
 }
+
+.spinner {
+    border: 16px solid silver;
+    border-top: 16px solid #337AB7;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 700ms linear infinite;
+    top: 40%;
+    left: 55%;
+    position: absolute;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    padding: 5px;
+}
+
+.left {
+    width: 20%;
+    background-color: #E2E2E2;
+}
+.middle { width: 40%; }
+.right { width: 40%; }
+
+pre {
+    padding: 5px;
+    overflow-x: scroll;
+    font-family: Consolas, 'Cascadia Mono', monospace;
+    background-color: white;
+}
+
+.middle pre {
+    border: 1pt solid #004F96;
+}
+
+.right pre {
+    border: 1pt solid #1E7F1E;
+}
+
+pre .keyword { color: #0000FF; }
+pre .control { color: #8F08C4; }
+pre .method { color: #74531F; }
+pre .type { color: #2B91AF; }
+pre .string { color: #A31515; }
+pre .variable { color: #1F377F; }
+pre .comment { color: #008000; }
+pre .excluded { color: #686868; }
+pre .preprocess { color: #686868; }
