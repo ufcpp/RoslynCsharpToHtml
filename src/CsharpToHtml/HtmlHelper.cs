@@ -21,6 +21,8 @@ public static class HtmlHelper
     {
         var s = new StringBuilder();
 
+        s.Append(ClassTable.Header);
+
         var last = 0;
 
         foreach (var span in spans)
@@ -66,6 +68,8 @@ public static class HtmlHelper
         {
             s.Append(text[last..text.Length]);
         }
+
+        s.Append(ClassTable.Footer);
 
         return s.ToString();
     }

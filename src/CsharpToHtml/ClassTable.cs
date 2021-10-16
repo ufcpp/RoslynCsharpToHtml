@@ -1,7 +1,14 @@
 ﻿namespace CsharpToHtml;
 
+//todo: should be customizable, read from app settings.
 public class ClassTable
 {
+    public static string Header => @"<pre class=""source"" title="""">
+<code>";
+
+    public static string Footer => @"</code></pre>
+";
+
     public static string? ClassToColor(string? @class) => @class switch
     {
         "keyword" => "0000FF",
@@ -18,7 +25,7 @@ public class ClassTable
 
     public static string? TypeToClass(string classificationType) => classificationType switch
     {
-        "keyword" => "keyword",
+        "keyword" => "reserved",
 
         "keyword - control" => "control",
 
