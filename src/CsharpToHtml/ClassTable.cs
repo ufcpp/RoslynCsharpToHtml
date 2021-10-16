@@ -31,6 +31,7 @@ public class ClassTable
         or "record class name"
         or "record struct name"
         or "type parameter name"
+        or "delegate name"
         => "type",
 
         "string" or "string - verbatim" => "string",
