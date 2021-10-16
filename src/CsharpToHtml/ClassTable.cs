@@ -22,7 +22,9 @@ public class ClassTable
 
         "keyword - control" => "control",
 
-        "method name" => "method",
+        "method name"
+        or "extension method name"
+        => "method",
 
         "class name"
         or "struct name"
