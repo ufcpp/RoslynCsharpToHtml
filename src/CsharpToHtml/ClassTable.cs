@@ -18,7 +18,7 @@ public class ClassTable
 
     public static string? TypeToClass(string classificationType) => classificationType switch
     {
-        "keyword" => "keyword",
+        "keyword" => "reserved",
 
         "keyword - control" => "control",
 

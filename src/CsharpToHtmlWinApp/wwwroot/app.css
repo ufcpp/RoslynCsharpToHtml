@@ -86,7 +86,7 @@ pre {
     border: 1pt solid #1E7F1E;
 }
 
-pre .keyword { color: #0000FF; }
+pre .reserved { color: #0000FF; }
 pre .control { color: #8F08C4; }
 pre .method { color: #74531F; }
 pre .type { color: #2B91AF; }
