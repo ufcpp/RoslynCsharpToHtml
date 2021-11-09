@@ -7,3 +7,7 @@ dotnet_diagnostic.IDE0008.severity = silent
 dotnet_diagnostic.IDE0011.severity = silent
 dotnet_diagnostic.IDE0022.severity = silent
 dotnet_diagnostic.CA1816.severity = silent
+
+[*.{csproj,proj,projitems,shproj,props,targets}]
+indent_style = space
+indent_size = 2
