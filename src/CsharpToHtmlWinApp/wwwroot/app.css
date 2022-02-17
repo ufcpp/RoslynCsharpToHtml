@@ -74,8 +74,11 @@
 pre {
     padding: 5px;
     overflow-x: scroll;
-    font-family: Consolas, 'Cascadia Mono', monospace;
     background-color: white;
+}
+
+pre, pre code {
+    font-family: Consolas, 'Cascadia Mono', monospace;
 }
 
 .middle pre {
