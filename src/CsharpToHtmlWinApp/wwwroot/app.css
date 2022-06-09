@@ -93,8 +93,15 @@ pre .reserved { color: #0000FF; }
 pre .control { color: #8F08C4; }
 pre .method { color: #74531F; }
 pre .type { color: #2B91AF; }
+pre .type.struct { color: #2ba6af; }
 pre .string { color: #A31515; }
-pre .variable { color: #1F377F; }
+pre .variable { color: #2c2e55; }
 pre .comment { color: #008000; }
 pre .excluded { color: #686868; }
 pre .preprocess { color: #686868; }
+
+pre .number { color: #172841 }
+pre .operator { color: #3e1e4b }
+pre .constant { color: #501e1e }
+pre .field { color: #282a53 }
+pre .property { color: #1f454d }

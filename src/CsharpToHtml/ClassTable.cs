@@ -34,18 +34,22 @@ public class ClassTable
         => "method",
 
         "class name"
-        or "struct name"
         or "enum name"
         or "interface name"
         or "record class name"
-        or "record struct name"
-        or "type parameter name"
         or "delegate name"
         => "type",
 
+        "struct name"
+        or "record struct name"
+        => "type struct",
+
+        "type parameter name" => "type param",
+
         "string" or "string - verbatim" => "string",
 
-        "local name" or "parameter name" => "variable",
+        "local name" => "variable",
+        "parameter name" => "variable local",
 
         "comment"
         or "xml doc comment - attribute name"
@@ -58,11 +62,14 @@ public class ClassTable
         "excluded code" => "excluded",
         "preprocessor keyword" => "preprocess",
 
+        "number" => "number",
+        "operator" => "operator",
+        "constant name" => "constant",
+        "field name" => "field",
+        "property name" => "property",
+
         "identifier" => null,
         "namespace name" => null,
-        "number" => null,
-        "operator" => null,
-        "property name" => null,
         "punctuation" => null,
 
         _ => null,
