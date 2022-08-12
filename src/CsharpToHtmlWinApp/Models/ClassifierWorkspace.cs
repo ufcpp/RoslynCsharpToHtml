@@ -14,7 +14,15 @@ public class ClassfierWorkspace : IDisposable
 
     public ClassfierWorkspace()
     {
-        MSBuildLocator.RegisterDefaults();
+        var instances = MSBuildLocator.QueryVisualStudioInstances();
+        var instance = instances.MaxBy(x => x.Version);
+
+        if (instance is null) throw new InvalidOperationException();
+
+        //todo: show which version loaded
+        System.Diagnostics.Debug.WriteLine(instance.Version);
+
+        MSBuildLocator.RegisterInstance(instance);
         _workspace = MSBuildWorkspace.Create();
     }
 
