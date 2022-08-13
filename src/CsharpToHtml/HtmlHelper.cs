@@ -41,14 +41,29 @@ public static class HtmlHelper
             {
                 if (tag.ClassName is { } @class)
                 {
+                    s.Append("<span ");
+
                     if (useStyle && ClassTable.ClassToColor(@class) is { } color)
                     {
-                        s.Append($"""<span style="color:#{color};">""");
+                        s.Append($"""
+                            <span style="color:#{color};"
+                            """);
                     }
                     else
                     {
-                        s.Append($"""<span class="{@class}">""");
+                        s.Append($"""
+                            <span class="{@class}"
+                            """);
                     }
+
+                    if (tag.DiagnosticId is { } id)
+                    {
+                        s.Append($"""
+                            title="{id}"
+                            """);
+                    }
+
+                    s.Append('>');
                 }
                 else
                 {

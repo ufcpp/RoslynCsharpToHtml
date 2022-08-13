@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.Classification;
 
 namespace CsharpToHtml;
 
-public readonly record struct Tag(int Position, string? ClassName)
+public readonly record struct Tag(int Position, string? ClassName, string? DiagnosticId = null)
 {
     public static Builder GetBuilder() => new();
 
@@ -42,7 +42,7 @@ public readonly record struct Tag(int Position, string? ClassName)
             };
             if (sevirity is null) return this;
 
-            _tags.Add(new(diag.Location.SourceSpan.Start, sevirity));
+            _tags.Add(new(diag.Location.SourceSpan.Start, sevirity, diag.Id));
             _tags.Add(new(diag.Location.SourceSpan.End, null));
 
             return this;
