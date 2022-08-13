@@ -59,7 +59,7 @@ public static class HtmlHelper
                     if (tag.DiagnosticId is { } id)
                     {
                         s.Append($"""
-                            title="{id}"
+                             title="{id}"
                             """);
                     }
 
