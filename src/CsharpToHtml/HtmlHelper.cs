@@ -9,14 +9,19 @@ public static class HtmlHelper
 {
     public static async Task<string> ToHtmlAsync(this Document doc, bool useStyle)
     {
+        var builder = Tag.GetBuilder();
+
         var text = await doc.GetTextAsync();
         var classifiedSpans = await Classifier.GetClassifiedSpansAsync(doc, TextSpan.FromBounds(0, text.Length));
+        builder.Append(classifiedSpans);
 
-        var tags = Tag.GetBuilder()
-            .Append(classifiedSpans)
-            .Build();
+        if (await doc.Project.GetCompilationAsync() is { } compilation)
+        {
+            var diags = compilation.GetDiagnostics().Where(d => d.Location.SourceTree?.FilePath == doc.FilePath).ToArray();
+            builder.Append(diags);
+        }
 
-        return text.ToHtml(tags, useStyle);
+        return text.ToHtml(builder.Build(), useStyle);
     }
 
     public static string ToHtml(this SourceText text, Tag.Queue tags, bool useStyle)

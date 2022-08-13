@@ -1,4 +1,7 @@
-﻿using Microsoft.CodeAnalysis.Classification;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Classification;
+using System.Security.Claims;
+using System;
 
 namespace CsharpToHtml;
 
@@ -40,6 +43,30 @@ public readonly record struct Tag(int Position, string? ClassName)
         {
             foreach (var span in classifiedSpans)
                 Append(span);
+
+            return this;
+        }
+
+        public Builder Append(Diagnostic diag)
+        {
+            var sevirity = diag.Severity switch
+            {
+                DiagnosticSeverity.Warning => "warning",
+                DiagnosticSeverity.Error => "error",
+                _ => null,
+            };
+            if (sevirity is null) return this;
+
+            _tags.Add(new(diag.Location.SourceSpan.Start, sevirity));
+            _tags.Add(new(diag.Location.SourceSpan.End, null));
+
+            return this;
+        }
+
+        public Builder Append(IEnumerable<Diagnostic> diags)
+        {
+            foreach (var diag in diags)
+                Append(diag);
 
             return this;
         }
