@@ -71,6 +71,9 @@
 .middle { width: 40%; }
 .right { width: 40%; }
 
+.message {
+}
+
 pre {
     padding: 5px;
     overflow-x: scroll;

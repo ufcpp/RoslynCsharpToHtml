@@ -7,12 +7,19 @@ namespace CsharpToHtmlWinApp.Models;
 
 public class ClassfierWorkspace : IDisposable
 {
+    public string DetnetSdkVersion { get; }
     public string? CsprojPath { get; set; }
 
     private readonly MSBuildWorkspace _workspace;
     private Project? _project;
 
     public ClassfierWorkspace()
+    {
+        DetnetSdkVersion = RegisterMSBuild();
+        _workspace = MSBuildWorkspace.Create();
+    }
+
+    private static string RegisterMSBuild()
     {
         var instances = MSBuildLocator.QueryVisualStudioInstances();
         var instance = instances.MaxBy(x => x.Version);
@@ -23,7 +30,8 @@ public class ClassfierWorkspace : IDisposable
         System.Diagnostics.Debug.WriteLine(instance.Version);
 
         MSBuildLocator.RegisterInstance(instance);
-        _workspace = MSBuildWorkspace.Create();
+
+        return instance.Version.ToString();
     }
 
     public bool IsOpen => _project is not null;
