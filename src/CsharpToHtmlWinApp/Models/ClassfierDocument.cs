@@ -26,5 +26,5 @@ public class ClassfierDocument
     public string? ShortName { get; }
     public bool IsGenerated { get; }
 
-    public async Task<string> ClassifyAsync() => await _document.ToHtmlAsync(false);
+    public async Task<(string original, string html)> ClassifyAsync() => await _document.ToHtmlAsync(false);
 }

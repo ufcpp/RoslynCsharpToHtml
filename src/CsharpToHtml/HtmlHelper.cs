@@ -7,7 +7,7 @@ namespace CsharpToHtml;
 
 public static class HtmlHelper
 {
-    public static async Task<string> ToHtmlAsync(this Document doc, bool useStyle)
+    public static async Task<(string original, string html)> ToHtmlAsync(this Document doc, bool useStyle)
     {
         var builder = Tag.GetBuilder();
 
@@ -21,7 +21,7 @@ public static class HtmlHelper
             builder.Append(diags);
         }
 
-        return text.ToHtml(builder.Build(), useStyle);
+        return (text.ToString(), text.ToHtml(builder.Build(), useStyle));
     }
 
     public static string ToHtml(this SourceText text, Tag.Queue tags, bool useStyle)

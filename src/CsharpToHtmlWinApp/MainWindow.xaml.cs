@@ -10,6 +10,7 @@ public partial class MainWindow : Window
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddWpfBlazorWebView();
         serviceCollection.AddSingleton<Models.ClassfierWorkspace>();
+        serviceCollection.AddSingleton<IClipboardService, WpfClipboardService>();
         Services = serviceCollection.BuildServiceProvider();
     }
 

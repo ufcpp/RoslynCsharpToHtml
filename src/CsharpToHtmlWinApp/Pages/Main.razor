@@ -1,5 +1,6 @@
 ﻿@using CsharpToHtmlWinApp.Models
 @inject ClassfierWorkspace Workspace
+@inject IClipboardService Clipboard
 
 <div>
     path to csproj:
@@ -27,10 +28,12 @@ else
 
     <div class="column middle">
         <pre>@markup.Value</pre>
+        <button @onclick="CopyMarkupToClipboard">Copy</button>
     </div>
 
     <div class="column right">
         @markup
+        <button @onclick="CopyOriginalSourceToClipboard">Copy</button>
     </div>
 </div>
 
@@ -42,6 +45,7 @@ else
     private bool isLoading;
 
     private MarkupString markup;
+    private string? originalSource;
 
     private string? Message;
 
@@ -68,8 +72,21 @@ else
     private async Task Classify(ClassfierDocument doc)
     {
         isLoading = true;
-        var x = await doc.ClassifyAsync();
+        var (original, html) = await doc.ClassifyAsync();
         isLoading = false;
-        markup = (MarkupString)x;
+        originalSource = original;
+        markup = (MarkupString)html;
+    }
+
+    private async Task CopyMarkupToClipboard()
+    {
+        if (markup.Value is { } v)
+            await Clipboard.WriteTextAsync(v);
+    }
+
+    private async Task CopyOriginalSourceToClipboard()
+    {
+        if (originalSource is not null)
+            await Clipboard.WriteTextAsync(originalSource);
     }
 }
