@@ -89,6 +89,8 @@ pre, pre code {
     border: 1pt solid #1E7F1E;
 }
 
+pre .static { font-weight: bold; }
+
 pre .reserved { color: #0000FF; }
 pre .control { color: #8F08C4; }
 pre .method { color: #74531F; }

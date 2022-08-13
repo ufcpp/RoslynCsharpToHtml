@@ -11,62 +11,48 @@ public static class HtmlHelper
     {
         var text = await doc.GetTextAsync();
         var classifiedSpans = await Classifier.GetClassifiedSpansAsync(doc, TextSpan.FromBounds(0, text.Length));
-        return text.ToHtml(classifiedSpans, useStyle);
+
+        var tags = Tag.GetBuilder()
+            .Append(classifiedSpans)
+            .Build();
+
+        return text.ToHtml(tags, useStyle);
     }
 
-    public static string ToHtml(this SourceText text, IEnumerable<ClassifiedSpan> spans, bool useStyle)
-        => ToHtml(text.ToString(), spans, useStyle);
+    public static string ToHtml(this SourceText text, Tag.Queue tags, bool useStyle)
+        => ToHtml(text.ToString(), tags, useStyle);
 
-    public static string ToHtml(ReadOnlySpan<char> text, IEnumerable<ClassifiedSpan> spans, bool useStyle)
+    public static string ToHtml(ReadOnlySpan<char> text, Tag.Queue tags, bool useStyle)
     {
         var s = new StringBuilder();
 
         s.Append(ClassTable.Header);
 
-        var last = 0;
-
-        foreach (var span in spans)
+        for (int i = 0; i < text.Length; i++)
         {
-            if (span.ClassificationType == "static symbol") continue;
+            var c = text[i];
 
-            var end = span.TextSpan.End;
-
-            if (end <= last) continue;
-
-            var start = span.TextSpan.Start;
-
-            if (start > last)
+            while(tags.TryGet(i, out var tag))
             {
-                s.AppendEscape(text[last..start]);
-            }
-
-            var @class = ClassTable.TypeToClass(span.ClassificationType);
-
-            if (@class is null)
-            {
-                s.AppendEscape(text[start..end]);
-            }
-            else
-            {
-                if (useStyle)
+                if (tag.ClassName is { } @class)
                 {
-                    var color = ClassTable.ClassToColor(@class);
-                    s.Append($"<span style=\"color:#{color};\">");
+                    if (useStyle)
+                    {
+                        var color = ClassTable.ClassToColor(@class);
+                        s.Append($"<span style=\"color:#{color};\">");
+                    }
+                    else
+                    {
+                        s.Append($"<span class=\"{@class}\">");
+                    }
                 }
                 else
                 {
-                    s.Append($"<span class=\"{@class}\">");
+                    s.Append("</span>");
                 }
-                s.AppendEscape(text[start..end]);
-                s.Append("</span>");
             }
 
-            last = end;
-        }
-
-        if (last < text.Length)
-        {
-            s.Append(text[last..text.Length]);
+            s.Append(c);
         }
 
         s.Append(ClassTable.Footer);
