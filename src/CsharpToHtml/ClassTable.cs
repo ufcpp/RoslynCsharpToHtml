@@ -3,11 +3,15 @@
 //todo: should be customizable, read from app settings.
 public class ClassTable
 {
-    public static string Header => @"<pre class=""source"" title="""">
-<code>";
+    public static string Header => """
+        <pre class="source" title="">
 
-    public static string Footer => @"</code></pre>
-";
+        """;
+
+    public static string Footer => """
+        </pre>
+
+        """;
 
     public static string? ClassToColor(string? @class) => @class switch
     {
