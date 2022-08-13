@@ -1,7 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Classification;
-using System.Security.Claims;
-using System;
 
 namespace CsharpToHtml;
 
