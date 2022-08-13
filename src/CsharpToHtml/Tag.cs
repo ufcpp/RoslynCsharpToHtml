@@ -5,19 +5,6 @@ namespace CsharpToHtml;
 
 public readonly record struct Tag(int Position, string? ClassName)
 {
-    public static void AddTo(IEnumerable<ClassifiedSpan> classifiedSpans, IList<Tag> output)
-    {
-        foreach (var span in classifiedSpans)
-        {
-            var @class = ClassTable.TypeToClass(span.ClassificationType);
-
-            if (@class is null) continue;
-
-            output.Add(new(span.TextSpan.Start, @class));
-            output.Add(new(span.TextSpan.End, null));
-        }
-    }
-
     public static Builder GetBuilder() => new();
 
     public struct Builder
