@@ -3,12 +3,27 @@ using Microsoft.CodeAnalysis.Classification;
 
 namespace CsharpToHtml;
 
-public readonly record struct Tag(int Position, string? ClassName, string? DiagnosticId = null)
+public readonly record struct Tag(int Position, int Ordinal, string? ClassName = null, string? DiagnosticId = null) : IComparable<Tag>
 {
     public static Builder GetBuilder() => new();
 
+    public bool IsClose => ClassName is null;
+
+    public int CompareTo(Tag other)
+    {
+        var pos = Position.CompareTo(other.Position);
+        if (pos != 0) return pos;
+
+        var ord = Ordinal.CompareTo(other.Ordinal);
+
+        if (IsClose) ord = -ord; // close tag is reverse ordered.
+
+        return ord;
+    }
+
     public struct Builder
     {
+        private int _ordinal = 0;
         private readonly List<Tag> _tags = new();
         public Builder() { }
 
@@ -18,8 +33,9 @@ public readonly record struct Tag(int Position, string? ClassName, string? Diagn
 
             if (@class is null) return this;
 
-            _tags.Add(new(span.TextSpan.Start, @class));
-            _tags.Add(new(span.TextSpan.End, null));
+            var ord = _ordinal++;
+            _tags.Add(new(span.TextSpan.Start, ord, @class));
+            _tags.Add(new(span.TextSpan.End, ord));
 
             return this;
         }
@@ -42,8 +58,9 @@ public readonly record struct Tag(int Position, string? ClassName, string? Diagn
             };
             if (sevirity is null) return this;
 
-            _tags.Add(new(diag.Location.SourceSpan.Start, sevirity, diag.Id));
-            _tags.Add(new(diag.Location.SourceSpan.End, null));
+            var ord = _ordinal++;
+            _tags.Add(new(diag.Location.SourceSpan.Start, ord, sevirity, diag.Id));
+            _tags.Add(new(diag.Location.SourceSpan.End, ord));
 
             return this;
         }
@@ -58,7 +75,7 @@ public readonly record struct Tag(int Position, string? ClassName, string? Diagn
 
         public Queue Build()
         {
-            _tags.Sort((x, y) => x.Position.CompareTo(y.Position));
+            _tags.Sort();
             return new(_tags);
         }
     }
