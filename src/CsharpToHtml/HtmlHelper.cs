@@ -41,18 +41,18 @@ public static class HtmlHelper
             {
                 if (tag.ClassName is { } @class)
                 {
-                    s.Append("<span ");
+                    s.Append("<span");
 
                     if (useStyle && ClassTable.ClassToColor(@class) is { } color)
                     {
                         s.Append($"""
-                            <span style="color:#{color};"
+                             style="color:#{color};"
                             """);
                     }
                     else
                     {
                         s.Append($"""
-                            <span class="{@class}"
+                             class="{@class}"
                             """);
                     }
 
