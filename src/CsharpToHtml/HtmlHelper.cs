@@ -71,7 +71,7 @@ public static class HtmlHelper
                 }
             }
 
-            s.Append(c);
+            s.AppendEscape(c);
         }
 
         s.Append(ClassTable.Footer);
@@ -79,28 +79,25 @@ public static class HtmlHelper
         return s.ToString();
     }
 
-    public static void AppendEscape(this StringBuilder builder, ReadOnlySpan<char> rawText)
+    public static void AppendEscape(this StringBuilder builder, char c)
     {
-        foreach (var c in rawText)
+        switch (c)
         {
-            switch (c)
-            {
-                case '<':
-                    builder.Append("&lt;");
-                    break;
-                case '>':
-                    builder.Append("&gt;");
-                    break;
-                case '&':
-                    builder.Append("&amp;");
-                    break;
-                case '"':
-                    builder.Append("&quot;");
-                    break;
-                default:
-                    builder.Append(c);
-                    break;
-            }
+            case '<':
+                builder.Append("&lt;");
+                break;
+            case '>':
+                builder.Append("&gt;");
+                break;
+            case '&':
+                builder.Append("&amp;");
+                break;
+            case '"':
+                builder.Append("&quot;");
+                break;
+            default:
+                builder.Append(c);
+                break;
         }
     }
 }
