@@ -14,9 +14,13 @@ public readonly record struct Tag(int Position, int Ordinal, string? ClassName =
         var pos = Position.CompareTo(other.Position);
         if (pos != 0) return pos;
 
+        // close tags must preceeds open tags.
+        if (IsClose && !other.IsClose) return -1;
+        if (!IsClose && other.IsClose) return 1;
+
         var ord = Ordinal.CompareTo(other.Ordinal);
 
-        if (IsClose) ord = -ord; // close tag is reverse ordered.
+        if (IsClose) ord = -ord; // reverse order for close tags.
 
         return ord;
     }
