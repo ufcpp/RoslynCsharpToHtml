@@ -10,6 +10,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Item", "Solution Item", "{7862C416-6E27-4E68-90FF-340A6A558DFE}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		nuget.config = nuget.config
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1831E10D-D93D-48B0-87C5-F56C9DDCC6C3}"
