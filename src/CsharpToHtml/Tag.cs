@@ -1,10 +1,14 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Classification;
+using Microsoft.CodeAnalysis.Text;
 
 namespace CsharpToHtml;
 
-public readonly record struct Tag(int Position, int Ordinal, string? ClassName = null, string? DiagnosticId = null) : IComparable<Tag>
+public readonly record struct Tag(int Position, int OppositePosition, string? ClassName, string? DiagnosticId) : IComparable<Tag>
 {
+    public static Tag Open(TextSpan span, string className, string? diagnosticId = null) => new(span.Start, span.End, className, diagnosticId);
+    public static Tag Close(TextSpan span) => new(span.End, span.Start, null, null);
+
     public static Builder GetBuilder() => new();
 
     public bool IsClose => ClassName is null;
@@ -18,16 +22,12 @@ public readonly record struct Tag(int Position, int Ordinal, string? ClassName =
         if (IsClose && !other.IsClose) return -1;
         if (!IsClose && other.IsClose) return 1;
 
-        var ord = Ordinal.CompareTo(other.Ordinal);
-
-        if (IsClose) ord = -ord; // reverse order for close tags.
-
-        return ord;
+        // reverse order for opposite tags.
+        return -OppositePosition.CompareTo(other.OppositePosition);
     }
 
     public struct Builder
     {
-        private int _ordinal = 0;
         private readonly List<Tag> _tags = new();
         public Builder() { }
 
@@ -37,9 +37,8 @@ public readonly record struct Tag(int Position, int Ordinal, string? ClassName =
 
             if (@class is null) return this;
 
-            var ord = _ordinal++;
-            _tags.Add(new(span.TextSpan.Start, ord, @class));
-            _tags.Add(new(span.TextSpan.End, ord));
+            _tags.Add(Open(span.TextSpan, @class));
+            _tags.Add(Close(span.TextSpan));
 
             return this;
         }
@@ -62,9 +61,8 @@ public readonly record struct Tag(int Position, int Ordinal, string? ClassName =
             };
             if (sevirity is null) return this;
 
-            var ord = _ordinal++;
-            _tags.Add(new(diag.Location.SourceSpan.Start, ord, sevirity, diag.Id));
-            _tags.Add(new(diag.Location.SourceSpan.End, ord));
+            _tags.Add(Open(diag.Location.SourceSpan, sevirity, diag.Id));
+            _tags.Add(Close(diag.Location.SourceSpan));
 
             return this;
         }
