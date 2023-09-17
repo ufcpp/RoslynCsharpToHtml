@@ -22,9 +22,7 @@ public class ClassfierWorkspace : IDisposable
     private static string RegisterMSBuild()
     {
         var instances = MSBuildLocator.QueryVisualStudioInstances();
-        var instance = instances.MaxBy(x => x.Version);
-
-        if (instance is null) throw new InvalidOperationException();
+        var instance = instances.MaxBy(x => x.Version) ?? throw new InvalidOperationException();
 
         //todo: show which version loaded
         System.Diagnostics.Debug.WriteLine(instance.Version);
