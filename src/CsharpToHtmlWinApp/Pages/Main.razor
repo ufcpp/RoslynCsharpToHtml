@@ -66,11 +66,21 @@ else
     {
         isLoading = true;
         await Workspace.OpenProjectAsync();
+        await Classify();
         isLoading = false;
+    }
+
+    private string? _lastDocName;
+
+    private async Task Classify()
+    {
+        if (Workspace.FindDocument(_lastDocName) is { } doc)
+            await Classify(doc);
     }
 
     private async Task Classify(ClassfierDocument doc)
     {
+        _lastDocName = doc.ShortName;
         isLoading = true;
         var (original, html) = await doc.ClassifyAsync();
         isLoading = false;

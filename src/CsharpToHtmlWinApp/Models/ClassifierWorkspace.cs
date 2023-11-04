@@ -56,6 +56,12 @@ public class ClassfierWorkspace : IDisposable
 
     public IEnumerable<ClassfierDocument> Documents { get; private set; } = Array.Empty<ClassfierDocument>();
 
+    public ClassfierDocument? FindDocument(string? shortName)
+    {
+        if (shortName is null) return null;
+        return Documents.FirstOrDefault(x => x.ShortName == shortName);
+    }
+
     public string? Text { get; private set; }
 
     public void Dispose()
