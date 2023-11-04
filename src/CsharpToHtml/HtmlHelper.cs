@@ -1,4 +1,4 @@
-﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Text;
 using System.Text;
@@ -37,7 +37,7 @@ public static class HtmlHelper
         {
             var c = text[i];
 
-            while(tags.TryGet(i, out var tag))
+            while (tags.TryGet(i, out var tag))
             {
                 if (tag.ClassName is { } @class)
                 {

@@ -1,3 +1,3 @@
-﻿namespace CsharpToHtmlWinApp.Pages;
+namespace CsharpToHtmlWinApp.Pages;
 
 partial class Main { }
