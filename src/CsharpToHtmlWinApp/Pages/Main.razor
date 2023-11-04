@@ -5,6 +5,8 @@
 <div>
     path to csproj:
     <input @bind="Workspace.CsprojPath" style="width: 80%;" />
+    copy on load:
+    <input type="checkbox" @bind="Workspace.CopyOnLoad" />
 </div>
 
 
@@ -86,6 +88,9 @@ else
         isLoading = false;
         originalSource = original;
         markup = (MarkupString)html;
+
+        if (Workspace.CopyOnLoad)
+            await CopyMarkupToClipboard();
     }
 
     private async Task CopyMarkupToClipboard()

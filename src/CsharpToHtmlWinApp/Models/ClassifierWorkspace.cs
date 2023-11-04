@@ -9,6 +9,7 @@ public class ClassfierWorkspace : IDisposable
 {
     public string DetnetSdkVersion { get; }
     public string? CsprojPath { get; set; }
+    public bool CopyOnLoad { get; set; }
 
     private readonly MSBuildWorkspace _workspace;
     private Project? _project;

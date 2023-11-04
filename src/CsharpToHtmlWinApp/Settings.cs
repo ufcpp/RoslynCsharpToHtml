@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace CsharpToHtmlWinApp;
 
-public record Settings(string? CsprojPath)
+public record Settings(string? CsprojPath, bool CopyOnLoad)
 {
     private const string SettingFileName = "settings.json";
     private static string GetAppPath() => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CsharpToHtmlWinApp");
