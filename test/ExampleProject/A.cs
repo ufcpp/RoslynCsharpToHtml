@@ -1,4 +1,4 @@
-﻿namespace SampleProject
+namespace SampleProject
 {
     internal class A
     {

@@ -1,4 +1,4 @@
-﻿using CsharpToHtml;
+using CsharpToHtml;
 using Microsoft.CodeAnalysis;
 using System.IO;
 

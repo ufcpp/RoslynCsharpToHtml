@@ -1,4 +1,4 @@
-﻿using Microsoft.Build.Locator;
+using Microsoft.Build.Locator;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
 using System.IO;
@@ -9,6 +9,7 @@ public class ClassfierWorkspace : IDisposable
 {
     public string DetnetSdkVersion { get; }
     public string? CsprojPath { get; set; }
+    public bool CopyOnLoad { get; set; }
 
     private readonly MSBuildWorkspace _workspace;
     private Project? _project;
@@ -55,6 +56,12 @@ public class ClassfierWorkspace : IDisposable
     }
 
     public IEnumerable<ClassfierDocument> Documents { get; private set; } = Array.Empty<ClassfierDocument>();
+
+    public ClassfierDocument? FindDocument(string? shortName)
+    {
+        if (shortName is null) return null;
+        return Documents.FirstOrDefault(x => x.ShortName == shortName);
+    }
 
     public string? Text { get; private set; }
 

@@ -1,4 +1,4 @@
-﻿using Microsoft.CodeAnalysis.MSBuild;
+using Microsoft.CodeAnalysis.MSBuild;
 using Microsoft.Build.Locator;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Classification;

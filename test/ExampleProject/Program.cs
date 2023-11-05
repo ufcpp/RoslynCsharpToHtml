@@ -1,4 +1,4 @@
-﻿#define X
+#define X
 
 global using System.Text;
 using System.Buffers;

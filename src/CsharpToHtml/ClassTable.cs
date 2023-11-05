@@ -1,4 +1,4 @@
-﻿namespace CsharpToHtml;
+namespace CsharpToHtml;
 
 //todo: should be customizable, read from app settings.
 public class ClassTable

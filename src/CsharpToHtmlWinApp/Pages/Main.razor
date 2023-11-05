@@ -1,10 +1,12 @@
-﻿@using CsharpToHtmlWinApp.Models
+@using CsharpToHtmlWinApp.Models
 @inject ClassfierWorkspace Workspace
 @inject IClipboardService Clipboard
 
 <div>
     path to csproj:
     <input @bind="Workspace.CsprojPath" style="width: 80%;" />
+    copy on load:
+    <input type="checkbox" @bind="Workspace.CopyOnLoad" />
 </div>
 
 
@@ -66,16 +68,29 @@ else
     {
         isLoading = true;
         await Workspace.OpenProjectAsync();
+        await Classify();
         isLoading = false;
+    }
+
+    private string? _lastDocName;
+
+    private async Task Classify()
+    {
+        if (Workspace.FindDocument(_lastDocName) is { } doc)
+            await Classify(doc);
     }
 
     private async Task Classify(ClassfierDocument doc)
     {
+        _lastDocName = doc.ShortName;
         isLoading = true;
         var (original, html) = await doc.ClassifyAsync();
         isLoading = false;
         originalSource = original;
         markup = (MarkupString)html;
+
+        if (Workspace.CopyOnLoad)
+            await CopyMarkupToClipboard();
     }
 
     private async Task CopyMarkupToClipboard()

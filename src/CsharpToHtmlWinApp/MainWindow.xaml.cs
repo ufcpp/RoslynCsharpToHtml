@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
 namespace CsharpToHtmlWinApp;
@@ -31,13 +31,14 @@ public partial class MainWindow : Window
         {
             var workspace = Services.GetService<Models.ClassfierWorkspace>()!;
             workspace.CsprojPath = settings.CsprojPath;
+            workspace.CopyOnLoad = settings.CopyOnLoad;
         }
     }
 
     protected override void OnClosed(EventArgs e)
     {
         var workspace = Services.GetService<Models.ClassfierWorkspace>()!;
-        Settings.Save(new(workspace.CsprojPath));
+        Settings.Save(new(workspace.CsprojPath, workspace.CopyOnLoad));
         base.OnClosed(e);
     }
 }
