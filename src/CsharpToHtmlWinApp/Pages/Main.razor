@@ -76,7 +76,7 @@ else
 
     private async Task Classify()
     {
-        if (Workspace.FindDocument(_lastDocName) is { } doc)
+        if (Workspace.FindDocument(_lastDocName ?? "Program.cs") is { } doc)
             await Classify(doc);
     }
 
