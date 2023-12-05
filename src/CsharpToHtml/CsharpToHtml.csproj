@@ -6,9 +6,9 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Build.Locator" Version="1.6.10" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.9.0-2.23553.5" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Features" Version="4.9.0-2.23553.5" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.9.0-2.23553.5" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.9.0-3.23605.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Features" Version="4.9.0-3.23605.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="4.9.0-3.23605.1" />
   </ItemGroup>
 
 </Project>
