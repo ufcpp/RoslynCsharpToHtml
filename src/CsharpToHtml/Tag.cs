@@ -26,10 +26,9 @@ public readonly record struct Tag(int Position, int OppositePosition, string? Cl
         return -OppositePosition.CompareTo(other.OppositePosition);
     }
 
-    public struct Builder
+    public readonly struct Builder()
     {
-        private readonly List<Tag> _tags = new();
-        public Builder() { }
+        private readonly List<Tag> _tags = [];
 
         public Builder Append(ClassifiedSpan span)
         {
@@ -82,10 +81,9 @@ public readonly record struct Tag(int Position, int OppositePosition, string? Cl
         }
     }
 
-    public struct Queue
+    public readonly struct Queue(IEnumerable<Tag> items)
     {
-        private Queue<Tag> _queue;
-        internal Queue(IEnumerable<Tag> items) => _queue = new(items);
+        private readonly Queue<Tag> _queue = new(items);
 
         public bool TryGet(int position, out Tag tag)
         {

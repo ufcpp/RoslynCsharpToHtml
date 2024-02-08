@@ -52,10 +52,10 @@ public class ClassfierWorkspace : IDisposable
         Documents = _project?.Documents?
             .Select(x => new ClassfierDocument(projectDirectory, x))
             .Where(x => !x.IsGenerated)
-            ?? Array.Empty<ClassfierDocument>();
+            ?? [];
     }
 
-    public IEnumerable<ClassfierDocument> Documents { get; private set; } = Array.Empty<ClassfierDocument>();
+    public IEnumerable<ClassfierDocument> Documents { get; private set; } = [];
 
     public ClassfierDocument? FindDocument(string? shortName)
     {
