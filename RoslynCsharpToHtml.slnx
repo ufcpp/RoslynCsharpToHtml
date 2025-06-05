@@ -1,0 +1,20 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Item/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="nuget.config" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/CsharpToHtml/CsharpToHtml.csproj" />
+    <Project Path="src/CsharpToHtmlWinApp/CsharpToHtmlWinApp.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/ExampleProject/ExampleProject.csproj" />
+    <Project Path="test/RoslynClassifierDemoConsole/RoslynClassifierDemoConsole.csproj" />
+  </Folder>
+</Solution>
