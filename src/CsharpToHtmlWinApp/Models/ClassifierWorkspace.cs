@@ -1,4 +1,3 @@
-using Microsoft.Build.Locator;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
 using System.IO;
@@ -16,21 +15,8 @@ public class ClassfierWorkspace : IDisposable
 
     public ClassfierWorkspace()
     {
-        DetnetSdkVersion = RegisterMSBuild();
+        DetnetSdkVersion = ""; //todo
         _workspace = MSBuildWorkspace.Create();
-    }
-
-    private static string RegisterMSBuild()
-    {
-        var instances = MSBuildLocator.QueryVisualStudioInstances();
-        var instance = instances.MaxBy(x => x.Version) ?? throw new InvalidOperationException();
-
-        //todo: show which version loaded
-        System.Diagnostics.Debug.WriteLine(instance.Version);
-
-        MSBuildLocator.RegisterInstance(instance);
-
-        return instance.Version.ToString();
     }
 
     public bool IsOpen => _project is not null;
