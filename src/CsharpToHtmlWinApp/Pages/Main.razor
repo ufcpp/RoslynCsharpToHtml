@@ -38,8 +38,6 @@ else
         <button @onclick="CopyOriginalSourceToClipboard">Copy</button>
     </div>
 </div>
-
-    <div class="message">@Message</div>
 }
 
 @code {
@@ -49,19 +47,9 @@ else
     private MarkupString markup;
     private string? originalSource;
 
-    private string? Message;
-
     protected override async Task OnInitializedAsync()
     {
-        await ShowMessage($".NET SDK Version: {Workspace.DetnetSdkVersion}");
         await base.OnInitializedAsync();
-    }
-
-    private async Task ShowMessage(string message)
-    {
-        Message = message;
-        await Task.Delay(3000);
-        Message = "";
     }
 
     private async Task Open()

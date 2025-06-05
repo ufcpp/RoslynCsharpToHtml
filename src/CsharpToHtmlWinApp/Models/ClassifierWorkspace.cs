@@ -6,7 +6,6 @@ namespace CsharpToHtmlWinApp.Models;
 
 public class ClassfierWorkspace : IDisposable
 {
-    public string DetnetSdkVersion { get; }
     public string? CsprojPath { get; set; }
     public bool CopyOnLoad { get; set; }
 
@@ -15,7 +14,6 @@ public class ClassfierWorkspace : IDisposable
 
     public ClassfierWorkspace()
     {
-        DetnetSdkVersion = ""; //todo
         _workspace = MSBuildWorkspace.Create();
     }
 
