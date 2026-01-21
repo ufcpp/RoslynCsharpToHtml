@@ -2,7 +2,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Text;
 
-namespace CsharpToHtml;
+namespace CSharpToHtml;
 
 public readonly record struct Tag(int Position, int OppositePosition, string? ClassName, string? DiagnosticId) : IComparable<Tag>
 {
@@ -18,7 +18,7 @@ public readonly record struct Tag(int Position, int OppositePosition, string? Cl
         var pos = Position.CompareTo(other.Position);
         if (pos != 0) return pos;
 
-        // close tags must preceed open tags.
+        // close tags must precede open tags.
         if (IsClose && !other.IsClose) return -1;
         if (!IsClose && other.IsClose) return 1;
 
@@ -50,26 +50,26 @@ public readonly record struct Tag(int Position, int OppositePosition, string? Cl
             return this;
         }
 
-        public Builder Append(Diagnostic diag)
+        public Builder Append(Diagnostic d)
         {
-            var sevirity = diag.Severity switch
+            var severity = d.Severity switch
             {
                 DiagnosticSeverity.Warning => "warning",
                 DiagnosticSeverity.Error => "error",
                 _ => null,
             };
-            if (sevirity is null) return this;
+            if (severity is null) return this;
 
-            _tags.Add(Open(diag.Location.SourceSpan, sevirity, diag.Id));
-            _tags.Add(Close(diag.Location.SourceSpan));
+            _tags.Add(Open(d.Location.SourceSpan, severity, d.Id));
+            _tags.Add(Close(d.Location.SourceSpan));
 
             return this;
         }
 
-        public Builder Append(IEnumerable<Diagnostic> diags)
+        public Builder Append(IEnumerable<Diagnostic> diagnostics)
         {
-            foreach (var diag in diags)
-                Append(diag);
+            foreach (var d in diagnostics)
+                Append(d);
 
             return this;
         }

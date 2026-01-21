@@ -1,15 +1,15 @@
-using CsharpToHtml;
+using CSharpToHtml;
 using Microsoft.CodeAnalysis;
 using System.IO;
 
-namespace CsharpToHtmlWinApp.Models;
+namespace CSharpToHtmlWinApp.Models;
 
-public class ClassfierDocument
+public class ClassifierDocument
 {
     private readonly string _projectDirectory;
     private readonly Document _document;
 
-    public ClassfierDocument(string projectDirectory, Document document)
+    public ClassifierDocument(string projectDirectory, Document document)
     {
         _projectDirectory = projectDirectory;
         _document = document;

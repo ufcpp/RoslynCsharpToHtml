@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace CsharpToHtmlWinApp;
+namespace CSharpToHtmlWinApp;
 
 public interface IClipboardService
 {

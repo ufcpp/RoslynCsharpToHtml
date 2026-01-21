@@ -1,5 +1,5 @@
-@using CsharpToHtmlWinApp.Models
-@inject ClassfierWorkspace Workspace
+@using CSharpToHtmlWinApp.Models
+@inject ClassifierWorkspace Workspace
 @inject IClipboardService Clipboard
 
 <div>
@@ -68,7 +68,7 @@ else
             await Classify(doc);
     }
 
-    private async Task Classify(ClassfierDocument doc)
+    private async Task Classify(ClassifierDocument doc)
     {
         _lastDocName = doc.ShortName;
         isLoading = true;

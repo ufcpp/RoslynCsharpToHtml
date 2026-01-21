@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CsharpToHtml\CsharpToHtml.csproj" />
+    <ProjectReference Include="..\CSharpToHtml\CSharpToHtml.csproj" />
   </ItemGroup>
 
 </Project>

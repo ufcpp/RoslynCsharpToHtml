@@ -1,7 +1,7 @@
-<Application x:Class="CsharpToHtmlWinApp.App"
+<Application x:Class="CSharpToHtmlWinApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:CsharpToHtmlWinApp"
+             xmlns:local="clr-namespace:CSharpToHtmlWinApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

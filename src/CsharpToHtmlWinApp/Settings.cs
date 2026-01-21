@@ -1,12 +1,12 @@
 using System.IO;
 using System.Text.Json;
 
-namespace CsharpToHtmlWinApp;
+namespace CSharpToHtmlWinApp;
 
 public record Settings(string? CsprojPath, bool CopyOnLoad)
 {
     private const string SettingFileName = "settings.json";
-    private static string GetAppPath() => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CsharpToHtmlWinApp");
+    private static string GetAppPath() => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CSharpToHtmlWinApp");
 
     public static Settings? Load()
     {

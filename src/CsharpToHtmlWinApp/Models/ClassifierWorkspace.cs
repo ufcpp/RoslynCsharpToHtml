@@ -2,9 +2,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
 using System.IO;
 
-namespace CsharpToHtmlWinApp.Models;
+namespace CSharpToHtmlWinApp.Models;
 
-public class ClassfierWorkspace : IDisposable
+public class ClassifierWorkspace : IDisposable
 {
     public string? CsprojPath { get; set; }
     public bool CopyOnLoad { get; set; }
@@ -12,7 +12,7 @@ public class ClassfierWorkspace : IDisposable
     private readonly MSBuildWorkspace _workspace;
     private Project? _project;
 
-    public ClassfierWorkspace()
+    public ClassifierWorkspace()
     {
         _workspace = MSBuildWorkspace.Create();
     }
@@ -21,7 +21,7 @@ public class ClassfierWorkspace : IDisposable
 
     public async ValueTask OpenProjectAsync()
     {
-        if (CsprojPath is not { } proj) return;
+        if (CsprojPath is not { } project) return;
 
         // need help: I want to know how to reload modified source codes.
         // Currently, this method close and reopen whole of the csproj.
@@ -29,19 +29,19 @@ public class ClassfierWorkspace : IDisposable
         {
             _workspace.CloseSolution();
         }
-        _project = await _workspace.OpenProjectAsync(proj);
+        _project = await _workspace.OpenProjectAsync(project);
 
-        var projectDirectory = Path.GetDirectoryName(Path.GetFullPath(proj)) ?? "";
+        var projectDirectory = Path.GetDirectoryName(Path.GetFullPath(project)) ?? "";
 
         Documents = _project?.Documents?
-            .Select(x => new ClassfierDocument(projectDirectory, x))
+            .Select(x => new ClassifierDocument(projectDirectory, x))
             .Where(x => !x.IsGenerated)
             ?? [];
     }
 
-    public IEnumerable<ClassfierDocument> Documents { get; private set; } = [];
+    public IEnumerable<ClassifierDocument> Documents { get; private set; } = [];
 
-    public ClassfierDocument? FindDocument(string? shortName)
+    public ClassifierDocument? FindDocument(string? shortName)
     {
         if (shortName is null) return null;
         return Documents.FirstOrDefault(x => x.ShortName == shortName);

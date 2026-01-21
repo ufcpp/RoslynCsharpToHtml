@@ -11,8 +11,8 @@
     <File Path="nuget.config" />
   </Folder>
   <Folder Name="/src/">
-    <Project Path="src/CsharpToHtml/CsharpToHtml.csproj" />
-    <Project Path="src/CsharpToHtmlWinApp/CsharpToHtmlWinApp.csproj" />
+    <Project Path="src/CSharpToHtml/CSharpToHtml.csproj" />
+    <Project Path="src/CSharpToHtmlWinApp/CSharpToHtmlWinApp.csproj" />
   </Folder>
   <Folder Name="/test/">
     <Project Path="test/ExampleProject/ExampleProject.csproj" />

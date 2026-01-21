@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
-namespace CsharpToHtmlWinApp;
+namespace CSharpToHtmlWinApp;
 
 public partial class MainWindow : Window
 {
@@ -9,7 +9,7 @@ public partial class MainWindow : Window
     {
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddWpfBlazorWebView();
-        serviceCollection.AddSingleton<Models.ClassfierWorkspace>();
+        serviceCollection.AddSingleton<Models.ClassifierWorkspace>();
         serviceCollection.AddSingleton<IClipboardService, WpfClipboardService>();
         Services = serviceCollection.BuildServiceProvider();
     }
@@ -29,7 +29,7 @@ public partial class MainWindow : Window
 
         if (settings is not null)
         {
-            var workspace = Services.GetService<Models.ClassfierWorkspace>()!;
+            var workspace = Services.GetService<Models.ClassifierWorkspace>()!;
             workspace.CsprojPath = settings.CsprojPath;
             workspace.CopyOnLoad = settings.CopyOnLoad;
         }
@@ -37,7 +37,7 @@ public partial class MainWindow : Window
 
     protected override void OnClosed(EventArgs e)
     {
-        var workspace = Services.GetService<Models.ClassfierWorkspace>()!;
+        var workspace = Services.GetService<Models.ClassifierWorkspace>()!;
         Settings.Save(new(workspace.CsprojPath, workspace.CopyOnLoad));
         base.OnClosed(e);
     }

@@ -3,7 +3,7 @@ using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Text;
 using System.Text;
 
-namespace CsharpToHtml;
+namespace CSharpToHtml;
 
 public static class HtmlHelper
 {
@@ -17,8 +17,8 @@ public static class HtmlHelper
 
         if (await doc.Project.GetCompilationAsync() is { } compilation)
         {
-            var diags = compilation.GetDiagnostics().Where(d => d.Location.SourceTree?.FilePath == doc.FilePath).ToArray();
-            builder.Append(diags);
+            var d = compilation.GetDiagnostics().Where(d => d.Location.SourceTree?.FilePath == doc.FilePath).ToArray();
+            builder.Append(d);
         }
 
         return (text.ToString(), text.ToHtml(builder.Build(), useStyle));
